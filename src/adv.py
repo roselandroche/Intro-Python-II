@@ -57,16 +57,17 @@ while True:
     try:
         if choice == 'q':
             break
-        if choice == 'n' and player_one.current_room.n_to != None:
+        
+        if choice == 'n' and player_one.current_room.n_to:
             player_one.current_room = player_one.current_room.n_to
 
-        elif choice == 'e' and player_one.current_room.e_to != None:
+        elif choice == 'e' and player_one.current_room.e_to:
             player_one.current_room = player_one.current_room.e_to
 
-        elif choice == 's' and player_one.current_room.s_to != None:
+        elif choice == 's' and player_one.current_room.s_to:
             player_one.current_room = player_one.current_room.s_to
 
-        elif choice == 'w' and player_one.current_room.w_to != None:
+        elif choice == 'w' and player_one.current_room.w_to:
             player_one.current_room = player_one.current_room.w_to
             
     # Print an error message if the movement isn't allowed.
@@ -74,4 +75,4 @@ while True:
             print("Whoops! You can't go that way. Try another direction")
     # If the user enters "q", quit the game.
     except:
-        print("Whoops! You can't go that way.")
+        print("Invalid input. Please try again.")
