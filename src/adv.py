@@ -55,22 +55,23 @@ while True:
 
     # If the user enters a cardinal direction, attempt to move to the room there.
     try:
+        if choice == 'q':
+            break
         if choice == 'n' and player_one.current_room.n_to != None:
             player_one.current_room = player_one.current_room.n_to
 
         elif choice == 'e' and player_one.current_room.e_to != None:
-            this_room = room[player_one.current_room].e_to
+            player_one.current_room = player_one.current_room.e_to
 
         elif choice == 's' and player_one.current_room.s_to != None:
-            this_room = room[player_one.current_room].s_to
+            player_one.current_room = player_one.current_room.s_to
 
         elif choice == 'w' and player_one.current_room.w_to != None:
-            this_room = room[player_one.current_room].w_to
+            player_one.current_room = player_one.current_room.w_to
             
     # Print an error message if the movement isn't allowed.
         else:
-            print("Whoops! You can't go that way.")
+            print("Whoops! You can't go that way. Try another direction")
     # If the user enters "q", quit the game.
     except:
-        if choice == 'q':
-            break
+        print("Whoops! You can't go that way.")
