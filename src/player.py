@@ -7,3 +7,7 @@ class Player:
         self.current_room = current_room
 
         self.inventory = []
+
+    def get_item(self, item):
+        self.inventory.append(item)
+        print(f'{self.name} picked up {item}!')
