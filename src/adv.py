@@ -60,19 +60,15 @@ while True:
     # If the user enters a cardinal direction, attempt to move to the room there.
     elif choice == 'n' and player_one.current_room.n_to:
         player_one.current_room = player_one.current_room.n_to
-        # if items exist in room, print to console
 
     elif choice == 'e' and player_one.current_room.e_to:
         player_one.current_room = player_one.current_room.e_to
-        # if items exist in room, print to console
 
     elif choice == 's' and player_one.current_room.s_to:
         player_one.current_room = player_one.current_room.s_to
-        # if items exist in room, print to console
 
     elif choice == 'w' and player_one.current_room.w_to:
         player_one.current_room = player_one.current_room.w_to
-        # if items exist in room, print to console
         
 # Print an error message if the movement isn't allowed.
     else:
