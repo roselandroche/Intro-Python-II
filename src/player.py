@@ -10,4 +10,6 @@ class Player:
 
     def get_item(self, item):
         self.inventory.append(item)
-        print(f'{self.name} picked up {item}!')
+
+    def drop_item(self, item):
+        self.inventory.remove(item)

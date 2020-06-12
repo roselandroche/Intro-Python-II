@@ -1,23 +1,32 @@
 from room import Room
 from player import Player
+from item import Item
+
+# Declare items
+
+dusty_pickaxe = Item('dusty pickaxe', 'Someone must have left this here')
+torch = Item('musty torch', 'Anyone have a match?')
+rope = Item('worn rope', 'Something chewed on the end of this...')
+shiny_rocks = Item('shiny rocks', 'These are kind of pretty')
+broken_chest = Item('broken chest', 'This used to be useful I guess')
 
 # Declare all the rooms
 outside = Room("Outside Cave Entrance",
-                "North of you, the cave mount beckons", ['dirt', 'rocks'])
+                "North of you, the cave mount beckons", [dusty_pickaxe])
 
 foyer = Room("Foyer", """Dim light filters in from the south. Dusty
-passages run north and east.""", ['torches'])
+passages run north and east.""", [torch])
 
 overlook =  Room("Grand Overlook", """A steep cliff appears before you, falling
 into the darkness. Ahead to the north, a light flickers in
-the distance, but there is no way across the chasm.""", ['binoculars'])
+the distance, but there is no way across the chasm.""", [rope])
 
 narrow = Room("Narrow Passage", """The narrow passage bends here from west
-to north. The smell of gold permeates the air.""", ['pickaxes'])
+to north. The smell of gold permeates the air.""", [shiny_rocks])
 
 treasure = Room("Treasure Chamber", """You've found the long-lost treasure
 chamber! Sadly, it has already been completely emptied by
-earlier adventurers. The only exit is to the south.""", ['forgotten coins'])
+earlier adventurers. The only exit is to the south.""", [broken_chest])
 
 # Link rooms together
 
@@ -45,21 +54,29 @@ while True:
     # * Prints the current description (the textwrap module might be useful here).
     print(player_one.current_room.description)
 
+    # Print current inventory
+    for i in range(len(player_one.inventory)):
+        print(f'{player_one.name} has {i+1}: {player_one.inventory[i].name} in inventory')
+
     # Print items in current room
-    if len(player_one.current_room.items) >= 1:
-        for i in player_one.current_room.items:
-            print(f'Looking around, you see {i}')
+    print('Looking around you see...')
+    for i in range(len(player_one.current_room.items)):
+        print(f'{i+1}: {player_one.current_room.items[i].name}')
 
-    item_choice = input("Should you get the item? (y/n) :")
+    base_choice = input('What do you want to do? (get, drop, travel): ')
 
-    if item_choice == 'y':
-        if len(player_one.current_room.items) > 1:
-            which_item = input("Which item do you want? (1, 2, etc): ")
-            player_one.get_item(player_one.current_room.items[int(which_item) - 1])
-        else:
-            player_one.get_item(player_one.current_room.items[0])
+    if base_choice == 'get':
+        if len(player_one.current_room.items) >= 1:
+            which_item = input("Which item do you want? (#): ")
+            player_one.get_item(player_one.current_room.items[int(which_item)-1])
+            player_one.current_room.items[int(which_item)-1].on_take()
+            player_one.current_room.remove(player_one.current_room.items[int(which_item)-1])
     
-    print(f'{player_one.name} has items: {player_one.inventory}')
+    elif base_choice == 'drop':
+        if len(player_one.inventory) >= 1:
+            to_drop = input("What item do you want to drop? (#): ")
+            player_one.drop_item(player_one.inventory[int(to_drop)-1])
+            print(f'Dropped an item!')
 
     # * Waits for user input and decides what to do.
     choice = input("Type q to quit or\nWhere do you want to go? (n, e, s, w) : ")

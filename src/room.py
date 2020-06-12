@@ -2,7 +2,7 @@
 # description attributes.
 
 class Room:
-    def __init__(self, name, description, items):
+    def __init__(self, name, description, items=None):
         self.name = name
         self.description = description
 
@@ -12,3 +12,7 @@ class Room:
         self.w_to = None
 
         self.items = items
+    
+    def remove(self, removed):
+        self.items.remove(removed)
+        print(f'{self.name} has these items remaining: {self.items}')
