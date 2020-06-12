@@ -50,7 +50,7 @@ while True:
         for i in player_one.current_room.items:
             print(f'Looking around, you see {i}')
 
-    item_choice = input("Should you pick up an item? (y/n) :")
+    item_choice = input("Should you get the item? (y/n) :")
 
     if item_choice == 'y':
         if len(player_one.current_room.items) > 1:
@@ -62,7 +62,7 @@ while True:
     print(f'{player_one.name} has items: {player_one.inventory}')
 
     # * Waits for user input and decides what to do.
-    choice = input("Where do you want to go? (n, e, s, w) : ")
+    choice = input("Type q to quit or\nWhere do you want to go? (n, e, s, w) : ")
 
     # If the user enters "q", quit the game.
     if choice == 'q':
